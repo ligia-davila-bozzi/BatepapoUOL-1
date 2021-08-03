@@ -1,0 +1,141 @@
+body {
+  background-color: #f3f3f3;
+  font-family: 'Roboto', sans-serif;
+}
+
+ion-icon {
+  display: block;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.initial-page {
+  background-color: #fff;
+  height: 100vh;
+}
+
+.initial-page img, .initial-page input, .initial-page button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.initial-page img {
+  padding-top: 80px;
+  margin-bottom: 80px;
+  width: 130px;
+}
+
+.initial-page input, .initial-page button {
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.initial-page input {
+  margin-bottom: 20px;
+  padding: 20px 0;
+  width: 260px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+}
+
+.initial-page button {
+  color: #696969;
+  background-color: #E7E7E7;
+  width: 100px;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+header, footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 0 6px 4px rgba(0, 0, 0, .05);
+}
+
+header { top: 0; }
+footer { bottom: 0; }
+
+.container { margin: 10px 20px; }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  width: 75px;
+}
+
+main {
+  margin-top: 90px;
+}
+
+main .messages .message {
+  margin-bottom: 5px;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
+
+.direct { background-color: #FFDEDE; }
+.normal { background-color: #fff; }
+.status { background-color: #DCDCDC; }
+
+footer .new-message {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.options-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .68);
+  z-index: 200;
+}
+
+.options {
+  position: inherit;
+  top: 0;
+  right: 0;
+  width: 65%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.options strong {
+  display: block;
+  width: 170px;
+  margin: 20px auto;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+
+.options ul {
+  display: flex;
+  flex-flow: nowrap column;
+  gap: 10px;
+}
+
+.options li {
+  display: inherit;
+  margin-left: 20px;
+  align-items: center;
+  gap: 10px;
+}
