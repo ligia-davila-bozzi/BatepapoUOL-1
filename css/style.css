@@ -99,22 +99,22 @@ footer .new-message {
   outline: none;
 }
 
-.options-screen {
+.outside-options, .options {
   position: fixed;
   top: 0;
-  right: 0;
   height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, .68);
   z-index: 200;
 }
 
+.outside-options {
+  left: 0;
+  width: 35%;
+  background-color: rgba(0, 0, 0, .68);
+}
+
 .options {
-  position: inherit;
-  top: 0;
   right: 0;
   width: 65%;
-  height: 100%;
   background-color: #fff;
 }
 
@@ -138,4 +138,5 @@ footer .new-message {
   margin-left: 20px;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
