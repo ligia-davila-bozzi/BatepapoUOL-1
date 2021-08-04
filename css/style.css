@@ -133,7 +133,7 @@ footer .new-message {
   gap: 10px;
 }
 
-.options li {
+.options .option {
   display: inherit;
   margin-left: 20px;
   align-items: center;

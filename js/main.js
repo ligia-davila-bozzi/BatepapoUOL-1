@@ -1,14 +1,23 @@
 const people = document.querySelector(".people");
 const outside = document.querySelector(".outside-options");
-
-function hideOptions () {
-  document.querySelector(".outside-options").classList.add("hidden");
-  document.querySelector(".options").classList.add("hidden");
-}
+const sendMessage = document.querySelector(".send-message");
+const options = document.querySelectorAll(".option");
 
 people.addEventListener("click", () => {
-  document.querySelector(".outside-options").classList.remove("hidden");
-  document.querySelector(".options").classList.remove("hidden");
-})
+  document.querySelector(".options-window").classList.remove("hidden");
+});
 
-outside.addEventListener("click", () => hideOptions());
+outside.addEventListener("click", () => {
+  document.querySelector(".options-window").classList.add("hidden");
+});
+
+sendMessage.addEventListener("click", () => {
+  const messages = document.querySelector(".messages");
+  messages.innerHTML += `<li class="message normal">${document.querySelector(".new-message").value}</li>`;
+});
+
+options.forEach(option, () => {
+    option.addEventListener("click", () => {
+      this.innerHTML = "red";      
+    })
+});
