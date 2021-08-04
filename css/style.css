@@ -9,6 +9,11 @@ ion-icon {
   cursor: pointer;
 }
 
+strong {
+  font-weight: 700;
+  font-size: 16px;
+}
+
 .hidden {
   display: none;
 }
@@ -79,18 +84,20 @@ header .logo {
 }
 
 main {
-  margin-top: 90px;
+  margin-top: 80px;
+  margin-bottom: 55px;
 }
 
-main .messages .message {
+main .messages li {
   margin-bottom: 5px;
   padding: 10px;
   width: calc(100% - 20px);
 }
 
 .direct { background-color: #FFDEDE; }
-.normal { background-color: #fff; }
+.message { background-color: #fff; }
 .status { background-color: #DCDCDC; }
+.time { color: #aaa; }
 
 footer .new-message {
   width: 100%;
@@ -122,8 +129,6 @@ footer .new-message {
   display: block;
   width: 170px;
   margin: 20px auto;
-  font-weight: 700;
-  font-size: 16px;
   text-align: center;
 }
 
@@ -136,7 +141,12 @@ footer .new-message {
 .options .option {
   display: inherit;
   margin-left: 20px;
+  margin-right: 20px;
   align-items: center;
   gap: 10px;
   cursor: pointer;
+}
+
+.options .option.active {
+  background-color: red;
 }
