@@ -1,4 +1,4 @@
-const URL_SERVER = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages";
+const URL_MESSAGES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages";
 
 let username;
 
@@ -27,32 +27,47 @@ login.addEventListener("click", () => {
   }
 
   loginServer(username);
-
 });
 
 // Part 2 - Management of messages with promisses
 
 function loginServer (username) {
+  const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants", {
+    name: username,
+  });
+
+  promise.then(sendMessage);
+  promise.catch(checkError);
+
+  setInterval(() => {
+    keepLogin(username)
+  }, 3000);
+}
+
+function keepLogin (username) {
+  const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status", {
+    name: username,
+  });
+  promise.then(checkServer);
+  promise.catch(checkError);
+}
+
+function sendMessage (response) {
   const time = new Date();
-
-  const message = {
-    from: username,
+  const promise = axios.post(URL_MESSAGES, {
+    from: response.data.name,
     to: "Todos",
-    text: "entra na sala...",
+    text: "entrou na sala...",
     type: "status",
-    time: time.toLocaleTimeString().slice(0, 8)
-  }
-
-  console.log(message);
-
-  const promise = axios.post(URL_SERVER, message);
+    time: time.toLocaleTimeString().slice(0, 8),
+  });
 
   promise.then(checkMessages);
   promise.catch(checkError);
 }
 
 function checkServer () {
-  const promise = axios.get(URL_SERVER);
+  const promise = axios.get(URL_MESSAGES);
   promise.then(checkMessages);
   promise.catch(checkError);
 }
@@ -89,5 +104,3 @@ function checkError (error) {
       break;
   }
 }
-
-setInterval(checkServer, 3000);
