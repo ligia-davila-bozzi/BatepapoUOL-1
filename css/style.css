@@ -35,7 +35,7 @@ strong {
   width: 130px;
 }
 
-.initial-page input, .initial-page button {
+.initial-page input, .initial-page .login {
   font-size: 18px;
   line-height: 25px;
   text-align: center;
@@ -47,9 +47,10 @@ strong {
   width: 260px;
   border: 1px solid #d7d7d7;
   border-radius: 4px;
+  outline: none;
 }
 
-.initial-page button {
+.initial-page .login {
   color: #696969;
   background-color: #E7E7E7;
   width: 100px;
