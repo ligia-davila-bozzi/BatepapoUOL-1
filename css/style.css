@@ -95,8 +95,8 @@ main .messages li {
   width: calc(100% - 20px);
 }
 
-.direct { background-color: #FFDEDE; }
 .message { background-color: #fff; }
+.private_message { background-color: #FFDEDE; }
 .status { background-color: #DCDCDC; }
 .time { color: #aaa; }
 
@@ -105,49 +105,4 @@ footer .new-message {
   padding: 5px;
   border: none;
   outline: none;
-}
-
-.outside-options, .options {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  z-index: 200;
-}
-
-.outside-options {
-  left: 0;
-  width: 35%;
-  background-color: rgba(0, 0, 0, .68);
-}
-
-.options {
-  right: 0;
-  width: 65%;
-  background-color: #fff;
-}
-
-.options strong {
-  display: block;
-  width: 170px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.options ul {
-  display: flex;
-  flex-flow: nowrap column;
-  gap: 10px;
-}
-
-.options .option {
-  display: inherit;
-  margin-left: 20px;
-  margin-right: 20px;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.options .option.active {
-  background-color: red;
 }

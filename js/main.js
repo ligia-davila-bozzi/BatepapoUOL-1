@@ -1,106 +1,101 @@
+const URL_PARTICIPANTS = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants";
+const URL_STATUS = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status";
 const URL_MESSAGES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages";
 
 let username;
+let lastHTML;
 
-const people = document.querySelector(".people");
-const outside = document.querySelector(".outside-options");
 const login = document.querySelector(".login");
+const send = document.querySelector(".send-message");
+const newMessage = document.querySelector('.new-message');
 
-// Part 1 - Event Listeners
+login.addEventListener("click", getUsername);
+send.addEventListener("click", sendMessage);
+newMessage.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") sendMessage();
+})
 
-people.addEventListener("click", () => {
-  document.querySelector(".options-window").classList.remove("hidden");
-});
+function getUsername () {
+  const name = document.querySelector(".name").value;
+  const promise = axios.post(URL_PARTICIPANTS, {name});
+  promise.then(() => {
+    if (name !== "" || name.toLowerCase() === "todos") {
+      document.querySelector(".initial-page").classList.add("hidden");
+      document.querySelector(".chat").classList.remove("hidden");
+    }
+    setInterval(getMessages, 3000);
+    setInterval(() => {
+      axios.post(URL_STATUS, {name})
+    }, 5000);
+  })
+  username = name;
+};
 
-outside.addEventListener("click", () => {
-  document.querySelector(".options-window").classList.add("hidden");
-});
-
-login.addEventListener("click", () => {
-  username = document.querySelector(".username").value;
-  
-  if (username) {
-    document.querySelector(".initial-page").classList.add("hidden");
-    document.querySelector(".chat").classList.remove("hidden");
-  } else {
-    alert("Por favor, digite um nome de usuario valido!");
-  }
-
-  loginServer(username);
-});
-
-// Part 2 - Management of messages with promisses
-
-function loginServer (username) {
-  const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants", {
-    name: username,
-  });
-
-  promise.then(sendMessage);
-  promise.catch(checkError);
-
-  setInterval(() => {
-    keepLogin(username)
-  }, 3000);
-}
-
-function keepLogin (username) {
-  const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status", {
-    name: username,
-  });
-  promise.then(checkServer);
-  promise.catch(checkError);
-}
-
-function sendMessage (response) {
-  const time = new Date();
-  const promise = axios.post(URL_MESSAGES, {
-    from: response.data.name,
-    to: "Todos",
-    text: "entrou na sala...",
-    type: "status",
-    time: time.toLocaleTimeString().slice(0, 8),
-  });
-
-  promise.then(checkMessages);
-  promise.catch(checkError);
-}
-
-function checkServer () {
+function getMessages () {
   const promise = axios.get(URL_MESSAGES);
-  promise.then(checkMessages);
+  promise.then(putMessagesOnDocument);
   promise.catch(checkError);
 }
 
-function checkMessages (response) {
+function putMessagesOnDocument (response) {
   const messages = document.querySelector(".messages");
   messages.innerHTML = "";
   for (let message of response.data) {
     switch (message.type) {
       case "status":
-        messages.innerHTML += `<li class="${message.type}"><span class="time">(${message.time})</span> <strong>${message.from}</strong> ${message.text}</li>`;
+        messages.innerHTML += `<li class="${message.type}">
+          <span class="time">(${message.time})</span>
+          <strong>${message.from}</strong>
+          ${message.text}</li>`;
         break;
       
       case "message":
-        messages.innerHTML += `<li class="${message.type}"><span class="time">(${message.time})</span> <strong>${message.from}</strong> para <strong>${message.to}:</strong> ${message.text}</li>`;
+        messages.innerHTML += `<li class="${message.type}">
+          <span class="time">(${message.time})</span>
+          <strong>${message.from}</strong> para <strong>${message.to}</strong>:
+          ${message.text}</li>`;
+        break;
+
+      case "private_message":
+        if (message.to === username) {
+          messages.innerHTML += `<li class="${message.type}">
+            <span class="time">(${message.time})</span>
+            <strong>${message.from}</strong> reservadamente para <strong>${message.to}</strong>:
+            ${message.text}</li>`;
+        }
         break;
       
       default:
-        console.log("mensagem desconhecida");
+        console.log("mensagem invalida");
         break;
     }
   }
-}
 
-function checkError (error) {
-  switch (error.response.status) {
-    case 404:
-      break;
-    case 409:
-      break;
-    case 422:
-      break;
-    default:
-      break;
+  if (lastHTML !== messages.innerHTML) {
+    window.scrollTo(0, document.body.scrollHeight);
   }
-}
+
+  lastHTML = messages.innerHTML;
+};
+
+function sendMessage () {
+  const time = new Date();
+
+  const message = {
+    from: username,
+    to: "Todos",
+    text: newMessage.value,
+    type: "message",
+    time: time.toLocaleTimeString().slice(0, 8),
+  };
+
+  const promise = axios.post(URL_MESSAGES, message);
+  promise.then(getMessages);
+  promise.catch(checkError);
+
+  newMessage.value = "";
+};
+
+function checkError () {
+  console.log("Deu erro!");
+};
