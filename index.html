@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -35,6 +34,27 @@
         <ul class="messages"></ul>
       </main>
 
+      <aside class="message-options hidden">
+        <div class="shadow"></div>
+        
+        <div class="container">
+          <strong>Escolha um contato para enviar mensagem:</strong>
+          <ul class="online-users"></ul>
+          
+          <strong>Escolha a visibilidade:</strong>
+          <ul>
+            <li class="public active">
+              <ion-icon name="lock-closed"></ion-icon>
+              Público
+            </li>
+            <li class="private">
+              <ion-icon name="lock-open"></ion-icon>
+              Reservadamente
+            </li>
+          </ul>
+        </div>
+      </aside>
+      
       <footer>
         <div class="container flex">
           <input type="text" placeholder="Escreva aqui..." class="new-message" />

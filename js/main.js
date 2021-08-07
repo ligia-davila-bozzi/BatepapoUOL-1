@@ -8,11 +8,24 @@ let lastHTML;
 const login = document.querySelector(".login");
 const send = document.querySelector(".send-message");
 const newMessage = document.querySelector('.new-message');
+const people = document.querySelector(".people");
+const shadow = document.querySelector(".shadow");
 
 login.addEventListener("click", getUsername);
+
 send.addEventListener("click", sendMessage);
+
 newMessage.addEventListener("keydown", (event) => {
   if (event.key === "Enter") sendMessage();
+})
+
+people.addEventListener("click", () => {
+  document.querySelector(".message-options").classList.remove("hidden");
+  setInterval(checkOnlineUsers, 3000);
+})
+
+shadow.addEventListener("click", () => {
+  document.querySelector(".message-options").classList.add("hidden");
 })
 
 function getUsername () {
@@ -95,6 +108,27 @@ function sendMessage () {
 
   newMessage.value = "";
 };
+
+function checkOnlineUsers () {
+  const promise = axios.get(URL_PARTICIPANTS);
+  promise.then(putOnlineUsersOnList);
+  promise.catch(checkError);
+}
+
+function putOnlineUsersOnList (response) {
+  const onlineUsers = document.querySelector(".online-users");
+  onlineUsers.innerHTML = `<li class="user active">
+    <ion-icon name="person-circle"></ion-icon>
+    Todos
+  </li>`;
+  
+  for (let user of response.data) {
+    onlineUsers.innerHTML += `<li class="user">
+      <ion-icon name="person-circle"></ion-icon>
+      ${user.name}
+    </li>`;
+  }
+}
 
 function checkError () {
   console.log("Deu erro!");

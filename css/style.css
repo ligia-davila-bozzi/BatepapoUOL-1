@@ -69,10 +69,14 @@ header, footer {
   box-shadow: 0 0 6px 4px rgba(0, 0, 0, .05);
 }
 
+
+header .container,
+footer .container {
+  margin: 10px 20px;;
+}
+
 header { top: 0; }
 footer { bottom: 0; }
-
-.container { margin: 10px 20px; }
 
 .flex {
   display: flex;
@@ -105,4 +109,60 @@ footer .new-message {
   padding: 5px;
   border: none;
   outline: none;
+}
+
+.message-options .shadow {
+  width: 30%;
+  height: 100vh;
+  z-index: 200;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.message-options .container {
+  width: 70%;
+  height: 100vh;
+  padding: 0 20px 20px;
+  z-index: 200;
+  
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  background-color: white;
+}
+
+.message-options .container strong {
+  display: block;
+  margin: 20px auto 20px;
+  text-align: center;
+  width: 180px;
+}
+
+.message-options .container li {
+  position: relative;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.message-options .container li.active::after {
+  content: url("../assets/check.svg");
+  
+  position: absolute;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.message-options .private, 
+.message-options .public, 
+.message-options .user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
