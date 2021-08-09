@@ -112,7 +112,7 @@ footer .new-message {
 }
 
 .message-options .shadow {
-  width: 30%;
+  width: 40%;
   height: 100vh;
   z-index: 200;
   
@@ -124,10 +124,11 @@ footer .new-message {
 }
 
 .message-options .container {
-  width: 70%;
+  width: 60%;
   height: 100vh;
   padding: 0 20px 20px;
   z-index: 200;
+  overflow: scroll;
   
   position: fixed;
   top: 0;
@@ -165,4 +166,9 @@ footer .new-message {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.blocked {
+  opacity: .5;
+  cursor: not-allowed;
 }

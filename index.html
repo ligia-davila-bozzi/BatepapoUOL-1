@@ -43,12 +43,12 @@
           
           <strong>Escolha a visibilidade:</strong>
           <ul>
-            <li class="public active">
-              <ion-icon name="lock-closed"></ion-icon>
+            <li class="public active" onclick="selectMessageMode(this);">
+              <ion-icon name="lock-open"></ion-icon>
               Público
             </li>
-            <li class="private">
-              <ion-icon name="lock-open"></ion-icon>
+            <li class="private blocked" onclick="selectMessageMode(this);">
+              <ion-icon name="lock-closed"></ion-icon>
               Reservadamente
             </li>
           </ul>
