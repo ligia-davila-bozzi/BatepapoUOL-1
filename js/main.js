@@ -3,6 +3,7 @@ const URL_STATUS = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/statu
 const URL_MESSAGES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages";
 
 let username;
+let receiver;
 let mode;
 let lastHTML;
 
@@ -101,10 +102,17 @@ function putMessagesOnDocument (response) {
 
 function sendMessage () {
   const time = new Date();
+  const activeUser = document.querySelector(".user.active");
+
+  if (activeUser === null) {
+    receiver = "Todos";
+  } else {
+    receiver = activeUser.innerText;
+  }
 
   const message = {
     from: username,
-    to: document.querySelector(".user.active").innerText,
+    to: receiver,
     text: newMessage.value,
     type: defineMode(),
     time: time.toLocaleTimeString().slice(0, 8),
@@ -125,15 +133,15 @@ function checkOnlineUsers () {
 
 function putOnlineUsersOnList (response) {
   const onlineUsers = document.querySelector(".online-users");
-  onlineUsers.innerHTML = `<li class="user active" onclick="activeUser(this);">
-    <ion-icon name="person-circle"></ion-icon>
-    Todos
-  </li>`;
+  onlineUsers.innerHTML = '<li class="user active" onclick="activeUser(this);">\
+    <ion-icon name="person-circle"></ion-icon>\
+    Todos\
+  </li>';
   
   for (let user of response.data) {
-    onlineUsers.innerHTML += `<li class="user" onclick="activeUser(this);">
-      <ion-icon name="person-circle"></ion-icon>
-      ${user.name}
+    onlineUsers.innerHTML += `<li class="user" onclick="activeUser(this);">\
+      <ion-icon name="person-circle"></ion-icon>\
+      ${user.name}\
     </li>`;
   }
 }

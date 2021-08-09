@@ -128,7 +128,6 @@ footer .new-message {
   height: 100vh;
   padding: 0 20px 20px;
   z-index: 200;
-  overflow: scroll;
   
   position: fixed;
   top: 0;
@@ -166,6 +165,11 @@ footer .new-message {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.online-users {
+  overflow-y: scroll;
+  height: 310px;
 }
 
 .blocked {
