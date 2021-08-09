@@ -30,6 +30,7 @@ newMessage.addEventListener("keydown", (event) => {
 
 people.addEventListener("click", () => {
   document.querySelector(".message-options").classList.remove("hidden");
+  initialMode();
   checkOnlineUsers();
 })
 
@@ -157,6 +158,15 @@ function enablePrivate () {
   } else {
     private.classList.remove("blocked");
   }
+}
+
+function initialMode () {
+  const private = document.querySelector(".private");
+  const public = document.querySelector(".public");
+
+  private.classList.add("blocked");
+  private.classList.remove("active");
+  public.classList.add("active");
 }
 
 function defineMode () {
