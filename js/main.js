@@ -4,7 +4,6 @@ const URL_MESSAGES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/mes
 
 let username;
 let receiver;
-let mode;
 let lastHTML;
 
 const login = document.querySelector(".login");
@@ -182,6 +181,7 @@ function defineMode () {
   if (!private.classList.contains("blocked")) {    
     return private.classList.contains("active") ? "private_message" : "message";
   }
+  return "message";
 }
 
 function selectMessageMode (item) {
